@@ -181,6 +181,82 @@ module DeviseTokenAuth
       }, status: 404
     end
 
+    protected
+
+    def render_registrations_controller_create_error_missing_confirm_success_url
+      render json: {
+        status: 'error',
+        data:   @resource.as_json,
+        errors: [I18n.t("devise_token_auth.registrations.missing_confirm_success_url")]
+      }, status: 403
+    end
+
+    def render_registrations_controller_create_error_redirect_url_not_allowed
+      render json: {
+        status: 'error',
+        data:   @resource.as_json,
+        errors: [I18n.t("devise_token_auth.registrations.redirect_url_not_allowed", redirect_url: @redirect_url)]
+      }, status: 403
+    end
+
+    def render_registrations_controller_create_success
+      render json: {
+        status: 'success',
+        data:   @resource.as_json
+      }
+    end
+
+    def render_registrations_controller_create_error
+      render json: {
+        status: 'error',
+        data:   @resource.as_json,
+        errors: @resource.errors.to_hash.merge(full_messages: @resource.errors.full_messages)
+      }, status: 403
+    end
+
+    def render_registrations_controller_create_error_email_already_exists
+      render json: {
+        status: 'error',
+        data:   @resource.as_json,
+        errors: [I18n.t("devise_token_auth.registrations.email_already_exists", email: @resource.email)]
+      }, status: 403
+    end
+
+    def render_registrations_controller_update_success
+      render json: {
+        status: 'success',
+        data:   @resource.as_json
+      }
+    end
+
+    def render_registrations_controller_update_error
+      render json: {
+        status: 'error',
+        errors: @resource.errors.to_hash.merge(full_messages: @resource.errors.full_messages)
+      }, status: 403
+    end
+
+    def render_registrations_controller_update_error_user_not_found
+      render json: {
+        status: 'error',
+        errors: [I18n.t("devise_token_auth.registrations.user_not_found")]
+      }, status: 404
+    end
+
+    def render_registrations_controller_destroy_success
+      render json: {
+        status: 'success',
+        message: I18n.t("devise_token_auth.registrations.account_with_uid_destroyed", uid: @resource.uid)
+      }
+    end
+
+    def render_registrations_controller_destroy_error
+      render json: {
+        status: 'error',
+        errors: [I18n.t("devise_token_auth.registrations.account_to_destroy_not_found")]
+      }, status: 404
+    end
+
     private
 
     def resource_update_method

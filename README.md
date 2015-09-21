@@ -681,6 +681,7 @@ end
 To customize json rendering, implement the following protected controller methods, for success methods, assume that the @resource object is available:
 
 ### Registrations Controller
+<<<<<<< HEAD
 * render_create_error_missing_confirm_success_url
 * render_create_error_redirect_url_not_allowed
 * render_create_success
