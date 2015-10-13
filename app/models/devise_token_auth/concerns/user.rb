@@ -13,10 +13,6 @@ module DeviseTokenAuth::Concerns::User
     result
   end
 
-  def self.find_for_validation(params)
-    where(params)
-  end
-
   included do
     # Hack to check if devise is already enabled
     unless self.method_defined?(:devise_modules)
@@ -260,7 +256,7 @@ module DeviseTokenAuth::Concerns::User
       search_params.merge!("#{_m}" => self.send(_m))
     end
 
-    if provider == 'email' and self.class.find_for_validation(search_params).count > 0
+    if provider == 'email' and self.class.where(search_params).count > 0
       errors.add(:email, :already_in_use, default: "address is already in use")
     end
   rescue
