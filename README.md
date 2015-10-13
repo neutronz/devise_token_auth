@@ -191,17 +191,6 @@ Devise request_keys are injected into the find_for_authentication method for aut
   # config.request_keys = [:subdomain]
 ~~~
 
-## find_for_authentication
-
-Override this method if you need a custom finder method for authentication.
-
-## find_for_validation
-
-Override this method if you need a custom finder method during validation. For example if the request_key value is a json field.
-Otherwise, the method will use a standard AR where call.
-
-
-
 Read the [devise wiki](https://github.com/plataformatec/devise/wiki/How-to:-Scope-login-to-subdomain) for more information on request_keys configuration.
 
 ## OmniAuth authentication
