@@ -98,7 +98,7 @@ module DeviseTokenAuth::Concerns::User
 
   module ClassMethods
     protected
-    
+
 
     def tokens_has_json_column_type?
       database_exists? && table_exists? && self.columns_hash['tokens'] && self.columns_hash['tokens'].type.in?([:json, :jsonb])
@@ -247,16 +247,6 @@ module DeviseTokenAuth::Concerns::User
 
   protected
 
-<<<<<<< HEAD
-=======
-  # only validate unique email among users that registered by email
-  def unique_email_user
-    if provider == 'email' and self.class.where(provider: 'email', email: email).count > 0
-      errors.add(:email, :already_in_use, default: "address is already in use")
-    end
-  end
-
->>>>>>> allow request_keys options to scope validation on devise models on creation.
   def set_empty_token_hash
     self.tokens ||= {} if has_attribute?(:tokens)
   end
